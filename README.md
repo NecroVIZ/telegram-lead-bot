@@ -1,128 +1,164 @@
-Профессиональный Telegram-бот для автоматизации сбора заявок от клиентов с сохранением данных в Google Sheets. Подходит малому бизнесу, фрилансерам и стартапам для быстрого запуска системы сбора лидов без затрат на сложные CRM.
+# Telegram Lead Bot
 
-Основные возможности
- Интерактивный интерфейс с кнопками и пошаговой формой
- Валидация данных (имя, телефон, сообщение)
- Подтверждение заявки перед отправкой
- Сохранение заявок в таблицу Google Sheets
- Уведомления администраторам в Telegram
- Админ-панель с командами и статистикой
- Защита от спама (ограничение на количество заявок)
- Полная система логирования событий
- Graceful shutdown при остановке
- Поддержка нескольких администраторов
- Deep linking для отслеживания источников
- Полный набор автоматических тестов
+Professional Telegram bot for collecting leads and saving them to Google Sheets. Suitable for small businesses, freelancers, and startups to quickly launch a lead capture system without the cost of complex CRM.
 
-Технологии
-Python 3.10+
-aiogram 3.x (FSM, Callbacks, Middleware)
-Google Sheets API (gspread, google-auth)
-dotenv для управления конфигурацией
-pytest для тестирования
-logging с ротацией логов
+## Key Features
 
-Архитектура проекта
+- Interactive interface with buttons and step-by-step form
+- Data validation (name, phone, message)
+- Lead confirmation before submission
+- Save leads to Google Sheets
+- Admin notifications in Telegram
+- Admin panel with commands and statistics
+- Spam protection (limit on number of leads)
+- Full event logging
+- Graceful shutdown on stop
+- Support for multiple administrators
+- Deep linking for tracking sources
+- Complete set of automated tests
+
+## Technologies
+
+- Python 3.10+
+- aiogram 3.x (FSM, Callbacks, Middleware)
+- Google Sheets API (gspread, google-auth)
+- dotenv for configuration management
+- pytest for testing
+- logging with log rotation
+
+## Project Structure
+
+```
 telegram-lead-bot/
-├── bot/                    # Основной модуль бота
-│   ├── handlers/           # Обработчики команд и сообщений
-│   ├── states/             # Машина состояний (FSM)
-│   ├── keyboards/          # Клавиатуры и кнопки
-│   ├── middleware/         # Промежуточное ПО
-│   ├── utils/              # Вспомогательные утилиты
-│   ├── config.py           # Конфигурация из .env
-│   └── bot.py              # Регистрация хендлеров
-├── data/                   # Работа с данными (Google Sheets)
-├── logs/                   # Логи работы бота
-├── tests/                  # Автоматические тесты
-├── main.py                 # Точка входа
-├── .env                    # Переменные окружения
-├── .gitignore              # Игнорируемые файлы
-├── requirements.txt        # Зависимости
-├── README.md               # Эта документация
-├── Procfile                # Для деплоя (Render)
-└── pytest.ini             # Конфигурация тестов
+├── bot/                    # Main bot module
+│   ├── handlers/           # Command and message handlers
+│   ├── states/             # State machine (FSM)
+│   ├── keyboards/          # Keyboards and buttons
+│   ├── middleware/         # Middleware
+│   ├── utils/              # Utility functions
+│   ├── config.py           # Configuration from .env
+│   └── bot.py              # Handler registration
+├── data/                   # Data handling (Google Sheets)
+├── logs/                   # Bot logs
+├── tests/                  # Automated tests
+├── main.py                 # Entry point
+├── .env                    # Environment variables
+├── .gitignore              # Ignored files
+├── requirements.txt        # Dependencies
+├── README.md               # This documentation
+├── Procfile                # For deployment (Render)
+└── pytest.ini             # Test configuration
+```
 
-Установка и запуск
-1. Клонирование репозитория
-git clone https://github.com/NecroVIZ/telegram-lead-bot.git
+## Installation and Running
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your_username/telegram-lead-bot.git
 cd telegram-lead-bot
-2. Создание виртуального окружения
+```
+
+### 2. Create a virtual environment
+
+```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# или
+# or
 venv\Scripts\activate     # Windows
-3. Установка зависимостей
-pip install -r requirements.txt
-4. Создание Telegram-бота
-Найдите @BotFather в Telegram
-Отправьте /newbot и следуйте инструкциям
-Скопируйте полученный токен
-5. Настройка Google Sheets API
-Перейдите в Google Cloud Console
-Создайте новый проект или выберите существующий
-Включите Google Sheets API и Google Drive API
-Создайте сервисный аккаунт:
-IAM & Admin → Service Accounts → Create Service Account
-Дайте ему роль Editor
-Создайте JSON-ключ для сервисного аккаунта
-Переименуйте ключ в creds.json и положите в корень проекта
-Создайте таблицу Google Sheets
-Дайте доступ к таблице сервисному аккаунту (email из JSON-ключа)
-6. Конфигурация
-Создайте файл .env в корне проекта:
-# Токен Telegram-бота (обязательно)
-BOT_TOKEN=ваш_токен_бота
+```
 
-# ID администраторов (через запятую, обязательно)
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Create a Telegram bot
+
+1. Find [@BotFather](https://t.me/BotFather) in Telegram
+2. Send `/newbot` and follow the instructions
+3. Copy the received **token**
+
+### 5. Configure Google Sheets API
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable **Google Sheets API** and **Google Drive API**
+4. Create a **service account**:
+   - IAM & Admin → Service Accounts → Create Service Account
+   - Give it the **Editor** role
+5. Create a **JSON key** for the service account
+6. Rename the key to `creds.json` and place it in the project root
+7. Create a Google Sheet
+8. Give access to the sheet to the service account (email from the JSON key)
+
+### 6. Configuration
+
+Create a `.env` file in the project root:
+
+```env
+# Telegram bot token (required)
+BOT_TOKEN=your_bot_token
+
+# Administrator IDs (comma separated, required)
 ADMIN_IDS=123456789,987654321
 
-# Путь к JSON-ключу Google (опционально, по умолчанию creds.json)
+# Path to Google JSON key (optional, defaults to creds.json)
 GOOGLE_CREDS_PATH=creds.json
+```
 
-7. Запуск бота
+### 7. Run the bot
+
+```bash
 python main.py
+```
 
- Тестирование
-Для запуска автоматических тестов:
-# Запустить все тесты
+## Testing
+
+To run automated tests:
+
+```bash
+# Run all tests
 pytest
 
-# Запустить с подробным выводом
+# Run with verbose output
 pytest -v
 
-# Запустить тесты без предупреждений
+# Run tests without warnings
 pytest -v --disable-warnings
+```
 
-Команды бота
-/start
-Начать работу с ботом
-/cancel
-Отменить текущую форму
-/help
-Показать справку
-/admin
-Админ-панель (только для админов)
-/stats
-Статистика по заявкам (только для админов)
+## Bot Commands
 
-Безопасность
-Все чувствительные данные (токены, ключи) хранятся в .env
-Файл .env добавлен в .gitignore
-Ограничение на количество заявок (3 в час) для защиты от спама
-Валидация всех входных данных
-Логирование без персональных данных
-Проверка безопасности callback'ов
+| Command     | Description                        |
+|-------------|---------------------------------|
+| `/start`    | Start working with the bot          |
+| `/cancel`   | Cancel the current form         |
+| `/help`     | Show help               |
+| `/admin`    | Admin panel (admins only) |
+| `/stats`    | Lead statistics (admins only) |
 
-Масштабирование
-Бот готов к работе в продакшене и может быть:
+## Security
 
-Задеплоен на облачные платформы (Render, Heroku, VPS)
-Расширен функционал (оплата, календарь, CRM-интеграции)
-Использован как основа для SaaS-продукта
+- All sensitive data (tokens, keys) is stored in `.env`
+- The `.env` file is added to `.gitignore`
+- Limit on number of leads (3 per hour) for spam protection
+- Validation of all input data
+- Logging without personal data
+- Callback security checks
 
-Лицензия
-MIT License - вы можете использовать этот код в своих проектах с указанием авторства.
+## Scaling
 
-Поддержка
-Если у вас возникли вопросы или проблемы, создайте issue в репозитории GitHub.
+The bot is ready for production and can be:
+- Deployed to cloud platforms (Render, Heroku, VPS)
+- Extended functionality (payment, calendar, CRM integrations)
+- Used as a basis for a SaaS product
+
+## License
+
+MIT License - you can use this code in your projects with attribution.
+
+## Support
+
+If you have questions or issues, create an issue in the GitHub repository.
